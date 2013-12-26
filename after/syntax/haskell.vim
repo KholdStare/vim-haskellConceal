@@ -42,9 +42,9 @@ syntax match hsNiceOperator "\<sum\>" conceal cchar=∑
 syntax match hsNiceOperator "\<product\>" conceal cchar=∏ 
 syntax match hsNiceOperator "\<sqrt\>" conceal cchar=√ 
 syntax match hsNiceOperator "\<pi\>" conceal cchar=π
-syntax match hsNiceOperator "==" conceal cchar=≡
+syntax match hsNiceOperator "[^[:punct:]]\zs==\ze[^[:punct:]]" conceal cchar=≡
 syntax match hsNiceOperator "\/=" conceal cchar=≠
-syntax match hsNiceOperator ">>" conceal cchar=»
+syntax match hsNiceOperator "[^[:punct:]]\zs>>\ze[^[:punct:]]" conceal cchar=»
 
 let s:extraConceal = 1
 " Some windows font don't support some of the characters,
@@ -72,6 +72,9 @@ if s:extraConceal
 
     syntax match hsNiceOperator "=>" conceal cchar=⇒
     syntax match hsNiceOperator "=\zs<<" conceal cchar=«
+
+    " dot product
+    syntax match hsNiceOperator "<.>" conceal cchar=·
 
     " Redfining to get proper '::' concealing
     syntax match hs_DeclareFunction /^[a-z_(]\S*\(\s\|\n\)*::/me=e-2 nextgroup=hsNiceOperator contains=hs_FunctionName,hs_OpFunctionName
